@@ -10,33 +10,6 @@ project(
     DESCRIPTION "Url app example."
     LANGUAGES   CXX)
 
-#include(FetchContent)
-
-#FetchContent_Declare(
-#  wolfssl
-#  GIT_REPOSITORY  https://github.com/wolfSSL/wolfssl.git
-#  GIT_TAG         v4.8.1-stable)
-
-#set(WOLFSSL_ECC           yes)
-#set(WOLFSSL_EXAMPLES      yes)
-#set(WOLFSSL_CRYPT_TESTS   yes)
-#set(WOLFSSL_OPENSSLEXTRA  yes)
-
-#FetchContent_MakeAvailable(wolfssl)
-
-#FetchContent_Declare(
-#  curl
-#  GIT_REPOSITORY  https://github.com/curl/curl.git
-#  GIT_TAG         curl-7_81_0)
-
-#set(WolfSSL_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
-#set(WolfSSL_LIBRARY     $<TARGET_FILE:wolfssl>)
-#set(CURL_USE_WOLFSSL    ON)
-#set(BUILD_CURL_EXE      OFF)
-#set(BUILD_SHARED_LIBS   OFF)
-
-#FetchContent_MakeAvailable(curl)
-
 include(ExternalProject)
 
 ExternalProject_Add(
