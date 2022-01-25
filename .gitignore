@@ -1,0 +1,12 @@
+/bin/**
+/lib*/**
+/*build*/**
+/include/curl/**
+/include/wolfssl/**
+
+/.vs/
+/.idea/
+*.sln
+*.vcxproj
+*.filters
+*.user
