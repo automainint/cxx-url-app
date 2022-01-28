@@ -29,16 +29,6 @@ set(
   WOLFSSL_TARGET_FILE
   ${CMAKE_SOURCE_DIR}/lib/${CMAKE_STATIC_LIBRARY_PREFIX_CXX}wolfssl${CMAKE_STATIC_LIBRARY_SUFFIX_CXX})
 
-if(WIN32)
-  add_custom_command(
-    TARGET wolfssl POST_BUILD
-    COMMAND rmdir /s /q ${CMAKE_SOURCE_DIR}/_tmp)
-else()
-  add_custom_command(
-    TARGET wolfssl POST_BUILD
-    COMMAND rm -rf ${CMAKE_SOURCE_DIR}/_tmp)
-endif()
-
 ExternalProject_Add(
   curl
   GIT_REPOSITORY  https://github.com/curl/curl.git

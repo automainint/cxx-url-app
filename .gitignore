@@ -6,7 +6,10 @@
 
 /.vs/
 /.idea/
+/_tmp/
 *.sln
 *.vcxproj
 *.filters
 *.user
+
+toolchain.cmake
