@@ -1,8 +1,5 @@
-/bin/**
-/lib*/**
-/*build*/**
-/include/curl/**
-/include/wolfssl/**
+/*build*/
+/thirdparty/
 
 /.vs/
 /.idea/
@@ -11,5 +8,3 @@
 *.vcxproj
 *.filters
 *.user
-
-toolchain.cmake

@@ -1,0 +1,19 @@
+cmake_minimum_required(VERSION 3.16)
+
+project(fix-curl)
+
+include(GNUInstallDirs)
+
+install(CODE "set(FORWARD_INSTALL_PREFIX      ${CMAKE_INSTALL_PREFIX})")
+install(CODE "set(FORWARD_INSTALL_INCLUDEDIR  ${CMAKE_INSTALL_INCLUDEDIR})")
+
+install(CODE [[
+  file(
+    COPY
+      ${FORWARD_INSTALL_PREFIX}/${FORWARD_INSTALL_INCLUDEDIR}/wolfssl/openssl
+    DESTINATION
+      ${FORWARD_INSTALL_PREFIX}/${FORWARD_INSTALL_INCLUDEDIR})
+
+  unset(FORWARD_INSTALL_PREFIX)
+  unset(FORWARD_INSTALL_INCLUDEDIR)
+]])
