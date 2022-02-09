@@ -21,6 +21,10 @@ target_include_directories(${URLAPP_EXE} PUBLIC ${THIRDPARTY_PREFIX}/include)
 target_link_directories(${URLAPP_EXE} PRIVATE ${THIRDPARTY_PREFIX}/lib)
 target_link_libraries(${URLAPP_EXE} PRIVATE curl wolfssl Threads::Threads)
 
+if(UNIX)
+  target_link_libraries(${URLAPP_EXE} PRIVATE m)
+endif()
+
 include(GNUInstallDirs)
 
 install(

@@ -2,10 +2,11 @@
 #include <string>
 #include <curl/curl.h>
 
-auto response = std::string {};
+auto write_callback(char *data, size_t size, size_t count, std::string *response) -> size_t {
+  if (response == nullptr)
+    return 0;
 
-auto write_callback(void *data, size_t size, size_t count, void *) -> size_t {
-  response.append(reinterpret_cast<char *>(data), size * count);
+  response->append(reinterpret_cast<char *>(data), size * count);
   return size * count;
 }
 
@@ -19,13 +20,16 @@ void print_public_ip() {
     return;
   }
 
+  auto response = std::string {};
+
   curl_easy_setopt(curl, CURLOPT_VERBOSE, 1);
 
   curl_easy_setopt(curl, CURLOPT_URL, "https://api.ipify.org/");
   curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
+  curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
 
-  //curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0);
-  //curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0);
+  curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0);
+  curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0);
 
   response = "";
 
