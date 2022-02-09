@@ -1,0 +1,37 @@
+name: linux-build
+
+on:
+  push:
+    branches: [ dev, stable ]
+  pull_request:
+    branches: [ dev, stable ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up CMake 3.18
+        uses: jwlawson/actions-setup-cmake@v1.8
+        with:
+          cmake-version: 3.18
+
+      - name: Install dependencies
+        run: |
+          sudo apt install gcc-11 g++-11 autoconf automake libtool m4 nroff perl
+
+      - name: Build with GCC 11
+        run: |
+          cmake -B build -S .
+          cmake --build build
+        env:
+          CC: gcc-11
+          CXX: g++-11
+
+      - name: Run
+        working-directory: ${{ github.workspace }}/install/bin
+        run: |
+          ./urlapp
