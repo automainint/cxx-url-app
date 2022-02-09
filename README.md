@@ -11,8 +11,8 @@ C++ & CMake project example using [curl][curl-link].
   - autoconf
   - automake
   - libtool
-  - GNU m4
-  - nroff
+  - m4
+  - groff
   - perl
 
 [curl-link]: https://github.com/curl/curl
