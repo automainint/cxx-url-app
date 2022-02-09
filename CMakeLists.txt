@@ -15,8 +15,11 @@ if(URLAPP_BUILD_DEPENDENCIES)
     GIT_REPOSITORY    https://github.com/wolfSSL/wolfssl.git
     GIT_TAG           ${URLAPP_WOLFSSL_TAG}
     BUILD_IN_SOURCE   ON
-    CONFIGURE_COMMAND autoreconf -fi
-    COMMAND           CC=${CMAKE_C_COMPILER} CXX=${CMAKE_CXX_COMPILER} ./configure --prefix=${CMAKE_CURRENT_SOURCE_DIR}/thirdparty --enable-static --disable-shared --enable-opensslextra --disable-examples --disable-crypttests
+    CONFIGURE_COMMAND ./autogen.sh
+    COMMAND
+      ${CMAKE_COMMAND} -E env "CC=${CMAKE_C_COMPILER}"
+      ${CMAKE_COMMAND} -E env "CXX=${CMAKE_CXX_COMPILER}"
+      ./configure --prefix=${CMAKE_CURRENT_SOURCE_DIR}/thirdparty --enable-static --disable-shared --enable-opensslextra --disable-examples --disable-crypttests
     BUILD_COMMAND     $(MAKE)
     INSTALL_COMMAND   $(MAKE) install)
 
@@ -25,7 +28,7 @@ if(URLAPP_BUILD_DEPENDENCIES)
     GIT_REPOSITORY    https://github.com/curl/curl.git
     GIT_TAG           ${URLAPP_CURL_TAG}
     BUILD_IN_SOURCE   ON
-    CONFIGURE_COMMAND autoreconf -fi
+    CONFIGURE_COMMAND ./buildconf
     COMMAND
       ${CMAKE_COMMAND} -E env "CC=${CMAKE_C_COMPILER}"
       ${CMAKE_COMMAND} -E env "CXX=${CMAKE_CXX_COMPILER}"
