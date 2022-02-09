@@ -16,7 +16,10 @@ if(URLAPP_BUILD_DEPENDENCIES)
     GIT_TAG           ${URLAPP_WOLFSSL_TAG}
     BUILD_IN_SOURCE   ON
     CONFIGURE_COMMAND autoreconf -fi
-    COMMAND           CC=${CMAKE_C_COMPILER} CXX=${CMAKE_CXX_COMPILER} ./configure --prefix=${CMAKE_CURRENT_SOURCE_DIR}/thirdparty --enable-static --disable-shared --enable-opensslextra --disable-examples --disable-crypttests
+    COMMAND
+      ${CMAKE_COMMAND} -E env "CC=${CMAKE_C_COMPILER}"
+      ${CMAKE_COMMAND} -E env "CXX=${CMAKE_CXX_COMPILER}"
+      ./configure --prefix=${CMAKE_CURRENT_SOURCE_DIR}/thirdparty --enable-opensslextra --disable-examples --disable-crypttests
     BUILD_COMMAND     $(MAKE)
     INSTALL_COMMAND   $(MAKE) install)
 
@@ -29,10 +32,9 @@ if(URLAPP_BUILD_DEPENDENCIES)
     COMMAND
       ${CMAKE_COMMAND} -E env "CC=${CMAKE_C_COMPILER}"
       ${CMAKE_COMMAND} -E env "CXX=${CMAKE_CXX_COMPILER}"
-      ${CMAKE_COMMAND} -E env "CPPFLAGS=-I${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/include -I${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/include/wolfssl"
-      ${CMAKE_COMMAND} -E env "LDFLAGS=-L${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/lib"
-      ${CMAKE_COMMAND} -E env "LIBS=-lm"
-      ./configure --prefix=${CMAKE_SOURCE_DIR}/thirdparty --disable-shared --without-zlib --with-wolfssl
+      ${CMAKE_COMMAND} -E env "CPPFLAGS=-I${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/include/wolfssl"
+      ${CMAKE_COMMAND} -E env "PKG_CONFIG_PATH=${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/lib/pkgconfig"
+      ./configure --prefix=${CMAKE_CURRENT_SOURCE_DIR}/thirdparty --without-zlib --with-wolfssl
     BUILD_COMMAND     $(MAKE)
     INSTALL_COMMAND   $(MAKE) install)
 endif()
