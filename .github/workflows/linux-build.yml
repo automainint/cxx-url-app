@@ -21,7 +21,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo apt install gcc-11 g++-11 autoconf automake libtool m4 nroff perl
+          sudo apt install -y gcc-11 g++-11 autoconf automake libtool m4 groff perl
 
       - name: Build with GCC 11
         run: |
