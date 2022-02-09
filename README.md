@@ -6,7 +6,7 @@ C++ & CMake project example using [curl][curl-link].
   - C++ compiler and build system
   - CMake
   - Git
-- To build curl & wolfssl:
+- To build curl & OpenSSL:
   - make
   - autoconf
   - automake

@@ -19,10 +19,11 @@ add_executable(${URLAPP_EXE})
 target_sources(${URLAPP_EXE} PRIVATE urlapp.cpp)
 target_include_directories(${URLAPP_EXE} PUBLIC ${THIRDPARTY_PREFIX}/include)
 target_link_directories(${URLAPP_EXE} PRIVATE ${THIRDPARTY_PREFIX}/lib)
-target_link_libraries(${URLAPP_EXE} PRIVATE curl wolfssl Threads::Threads)
+target_link_directories(${URLAPP_EXE} PRIVATE ${THIRDPARTY_PREFIX}/lib64)
+target_link_libraries(${URLAPP_EXE} PRIVATE curl ssl crypto Threads::Threads)
 
 if(UNIX)
-  target_link_libraries(${URLAPP_EXE} PRIVATE m)
+  target_link_libraries(${URLAPP_EXE} PRIVATE dl)
 endif()
 
 include(GNUInstallDirs)
