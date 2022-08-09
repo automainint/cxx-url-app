@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.16)
 
 option(URLAPP_BUILD_DEPENDENCIES "Build dependencies" ON)
 
-set(URLAPP_WOLFSSL_TAG  "v5.1.1-stable" CACHE STRING "wolfSSL git tag")
-set(URLAPP_CURL_TAG     "curl-7_81_0"   CACHE STRING "curl git tag")
+set(URLAPP_WOLFSSL_TAG  "v5.4.0-stable" CACHE STRING "wolfSSL git tag")
+set(URLAPP_CURL_TAG     "curl-7_84_0"   CACHE STRING "curl git tag")
 
 project(urlapp-root)
 
